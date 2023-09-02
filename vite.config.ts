@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig(({ command, mode, ssrBuild, }) => {
@@ -7,13 +7,13 @@ export default defineConfig(({ command, mode, ssrBuild, }) => {
     publicDir: 'static',
     build: {
       minify: true,
-      sourcemap: true,
+      sourcemap: false,
     },
     plugins: [
-      legacy({
-        targets: ['chrome >= 47'],
-        modernPolyfills: ['es/global-this'],
-      })
+      // legacy({
+      //   targets: ['chrome >= 47'],
+      //   modernPolyfills: ['es/global-this'],
+      // })
     ]
   }
 })

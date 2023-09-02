@@ -7,3 +7,7 @@ build/
 dist/
 bin/
 stats.html
+dist
+releases
+.tmp
+build
