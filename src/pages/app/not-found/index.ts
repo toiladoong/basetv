@@ -1,6 +1,6 @@
 import { Lightning, Utils, Router } from '@lightningjs/sdk';
 
-export default class Splash extends Lightning.Component {
+export default class NotFound extends Lightning.Component {
   static _template() {
     return {
       Background: {

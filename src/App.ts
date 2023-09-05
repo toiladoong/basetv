@@ -1,5 +1,6 @@
 import { Router, Utils } from '@lightningjs/sdk';
-import Menu from './widgets/Menu';
+import { FocusManager } from '@lightningjs/ui-components';
+import Menu from './libraries/widgets/Menu';
 import { root, routes } from './router';
 
 export default class App extends Router.App {
@@ -19,17 +20,25 @@ export default class App extends Router.App {
       Background: {
         w: 1920,
         h: 1080,
-        z: -100,
-        rect: true,
-        color: '#000'
+        colorBottom: 0xff000000,
+        scale: 1.2,
+        src: Utils.asset("images/background.png"),
+        transitions: {
+          scale: { duration: 1, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)' }
+        },
+        zIndex: 1
       },
-      // Widgets: {
-      //   Menu: {
-      //     type: Menu,
-      //     zIndex: 99,
-      //     visible: true
-      //   }
-      // }
+      Widgets: {
+        Menu: {
+          type: Menu,
+          zIndex: 99,
+          items: [
+            { label: 'Home', pageId: 'home', selected: true },
+            { label: 'Kênh', pageId: 'channel', selected: false },
+            { label: 'Phim', pageId: 'movie', selected: false }
+          ]
+        }
+      }
     }
   }
 
@@ -38,6 +47,12 @@ export default class App extends Router.App {
   }
 
   _setup() {
+    // console.log('routes', routes);
+
     Router.startRouter({ root, routes }, this);
+  }
+
+  _getFocused() {
+    return this;
   }
 }

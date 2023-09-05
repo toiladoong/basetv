@@ -1,5 +1,5 @@
-import Splash from './splash/route';
-import Home from './home/route';
+import Splash from './app/splash/route';
+import Home from './app/home/route';
 
 export default [
   Splash,

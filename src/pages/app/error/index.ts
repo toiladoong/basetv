@@ -1,6 +1,6 @@
 import { Lightning, Utils, Router } from '@lightningjs/sdk';
 
-export default class Home extends Lightning.Component {
+export default class Error extends Lightning.Component {
   static _template() {
     return {
       Background: {
@@ -14,12 +14,9 @@ export default class Home extends Lightning.Component {
         x: 960,
         y: 530,
         text: {
-          text: 'Trang chủ'
+          text: 'Error'
         }
       }
-    }
-  }
-
-  _init() {
+    };
   }
 }

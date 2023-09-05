@@ -1,5 +1,5 @@
 import Pages from '../pages';
-import NotFound from '../pages/not-found';
+import NotFound from '../pages/app/not-found';
 
 const routes: any = [];
 
@@ -8,11 +8,15 @@ Pages.forEach((route: any) => {
     route.path.forEach((path: any) => {
       routes.push({
         ...route,
-        path
+        path,
+        widgets: ['Menu']
       })
     })
   } else {
-    routes.push(route)
+    routes.push({
+      ...route,
+      widgets: ['Menu']
+    })
   }
 });
 

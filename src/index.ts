@@ -1,6 +1,6 @@
 import { Launch } from '@lightningjs/sdk';
-import inspect from './plugins/inspect';
-import { sequence } from './helpers';
+import inspect from './libraries/plugins/inspect';
+import { sequence } from './libraries/helpers';
 import App from './App';
 
 const loadInspect = async () => {
@@ -9,13 +9,17 @@ const loadInspect = async () => {
     // @ts-ignore
     return inspect(window.lng)
   }
-  
+
   return Promise.resolve()
 }
 
 const loadApp = () => {
   const app = Launch(App, {
-    stage: {},
+    stage: {
+      w: 1920,
+      h: 1080,
+      // precision: 2 / 3,
+    },
     debug: true,
     enablePointer: true,
     keys: {
@@ -32,24 +36,34 @@ const loadApp = () => {
     version: '0.0.1',
     icon: ''
   }, {
-    width: 1000,
-    height: 562.5,
     log: true,
     showVersion: true,
     showFps: true,
-    inspector: true
+    inspector: true,
+    lazyCreate: true,
+    lazyDestroy: true,
+    reuseInstance: true,
+    logRoute: false
   });
-  
+
   const canvas = app.stage.getCanvas();
-  document.body.appendChild(canvas);
+
+  const container = document.getElementById('app');
+
+  if (container) {
+    // container.replaceChild(canvas, container.childNodes[0]);
+    container.innerHTML = '';
+    container.appendChild(canvas);
+  } else {
+    document.body.appendChild(canvas);
+  }
 }
 
 const startApp = () => {
   sequence([
-      loadInspect,
-      loadApp
-    ]
-  )
+    loadInspect,
+    loadApp
+  ])
 }
 
 startApp();
